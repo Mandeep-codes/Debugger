@@ -1,0 +1,7 @@
+* This is a comment
+V1 1 0 12V
+R1 1 2 10k
+R2 2 0 4.7k
+Q1 3 2 4 BJT_MODEL
+R_dangling 6 0 100
+.END

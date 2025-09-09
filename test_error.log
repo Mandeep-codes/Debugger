@@ -1,0 +1,6 @@
+tran simulation(s) aborted
+doAnalyses: iteration limit reached, matrix is singular
+
+Error on line 5 : r1 1 2 10k extra_word
+unrecognized device type - syntax error
+Error: matrix is singular

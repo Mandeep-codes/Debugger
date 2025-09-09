@@ -1,0 +1,210 @@
+[
+    {
+        "label": "joblib",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "joblib",
+        "description": "joblib",
+        "detail": "joblib",
+        "documentation": {}
+    },
+    {
+        "label": "tkinter",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "tkinter",
+        "description": "tkinter",
+        "detail": "tkinter",
+        "documentation": {}
+    },
+    {
+        "label": "ttk",
+        "importPath": "tkinter",
+        "description": "tkinter",
+        "isExtraImport": true,
+        "detail": "tkinter",
+        "documentation": {}
+    },
+    {
+        "label": "scrolledtext",
+        "importPath": "tkinter",
+        "description": "tkinter",
+        "isExtraImport": true,
+        "detail": "tkinter",
+        "documentation": {}
+    },
+    {
+        "label": "filedialog",
+        "importPath": "tkinter",
+        "description": "tkinter",
+        "isExtraImport": true,
+        "detail": "tkinter",
+        "documentation": {}
+    },
+    {
+        "label": "requests",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "requests",
+        "description": "requests",
+        "detail": "requests",
+        "documentation": {}
+    },
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
+        "label": "io",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "io",
+        "description": "io",
+        "detail": "io",
+        "documentation": {}
+    },
+    {
+        "label": "run_full_analysis",
+        "importPath": "analyzer",
+        "description": "analyzer",
+        "isExtraImport": true,
+        "detail": "analyzer",
+        "documentation": {}
+    },
+    {
+        "label": "run_error_analysis",
+        "importPath": "error_analyzer",
+        "description": "error_analyzer",
+        "isExtraImport": true,
+        "detail": "error_analyzer",
+        "documentation": {}
+    },
+    {
+        "label": "pandas",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pandas",
+        "description": "pandas",
+        "detail": "pandas",
+        "documentation": {}
+    },
+    {
+        "label": "TfidfVectorizer",
+        "importPath": "sklearn.feature_extraction.text",
+        "description": "sklearn.feature_extraction.text",
+        "isExtraImport": true,
+        "detail": "sklearn.feature_extraction.text",
+        "documentation": {}
+    },
+    {
+        "label": "MultinomialNB",
+        "importPath": "sklearn.naive_bayes",
+        "description": "sklearn.naive_bayes",
+        "isExtraImport": true,
+        "detail": "sklearn.naive_bayes",
+        "documentation": {}
+    },
+    {
+        "label": "make_pipeline",
+        "importPath": "sklearn.pipeline",
+        "description": "sklearn.pipeline",
+        "isExtraImport": true,
+        "detail": "sklearn.pipeline",
+        "documentation": {}
+    },
+    {
+        "label": "read_and_print_file",
+        "kind": 2,
+        "importPath": "analyzer",
+        "description": "analyzer",
+        "peekOfCode": "def read_and_print_file(filepath):\n    results = []\n    with open(filepath, 'r') as file:\n        for line in file:\n            clean_line = line.strip()\n            if clean_line.startswith('*') or clean_line.startswith('.'):\n                continue\n            parts = clean_line.split()\n            results.append(parts)\n    return results",
+        "detail": "analyzer",
+        "documentation": {}
+    },
+    {
+        "label": "find_dangling_nets",
+        "kind": 2,
+        "importPath": "analyzer",
+        "description": "analyzer",
+        "peekOfCode": "def find_dangling_nets(component_list):\n    node_counts = {}\n    for component in component_list:\n        nodes_for_this_component = component[1:-1]\n        for node in nodes_for_this_component:\n            node_counts[node] = node_counts.get(node,0) + 1\n    error_reports = []\n    for node, count in node_counts.items():\n        if count == 1:\n            report = f\"Dangling Net Found: Node '{node}' is only connected to one component.\"",
+        "detail": "analyzer",
+        "documentation": {}
+    },
+    {
+        "label": "check_for_missing_models",
+        "kind": 2,
+        "importPath": "analyzer",
+        "description": "analyzer",
+        "peekOfCode": "def check_for_missing_models(component_list,filepath):\n    required_models = set()\n    for component in component_list:\n        component_name = component[0]\n        if component_name.startswith('Q'):\n            model_name = component[-1]\n            required_models.add(model_name)\n    defined_models = set()\n    with open(filepath  , 'r') as file:\n        for line in file:",
+        "detail": "analyzer",
+        "documentation": {}
+    },
+    {
+        "label": "run_full_analysis",
+        "kind": 2,
+        "importPath": "analyzer",
+        "description": "analyzer",
+        "peekOfCode": "def run_full_analysis(filepath):\n    report_lines = []\n    parsed_data = read_and_print_file(filepath)\n    all_errors = []\n    dangling_net_erros = find_dangling_nets(parsed_data)\n    all_errors.extend(dangling_net_erros)\n    missing_model_errors = check_for_missing_models(parsed_data, filepath)\n    all_errors.extend(missing_model_errors)\n    if all_errors: \n        report_lines.append(\"Issues Found:\")",
+        "detail": "analyzer",
+        "documentation": {}
+    },
+    {
+        "label": "analyze_log_with_ml",
+        "kind": 2,
+        "importPath": "error_analyzer",
+        "description": "error_analyzer",
+        "peekOfCode": "def analyze_log_with_ml(filepath):\n    if model is None:\n        return [\"Error: Model file 'error_classifier.joblib' not found. Please run ml_trainer.py to create it.\"]\n    with open(filepath, 'r') as file:\n        log_content = file.read()\n    prediction = model.predict([log_content])\n    error_type = prediction[0]\n    suggestion = suggestion_map.get(error_type, \"Error: Could not classify this error type.\")\n    return [suggestion]\ndef run_error_analysis(filepath):",
+        "detail": "error_analyzer",
+        "documentation": {}
+    },
+    {
+        "label": "run_error_analysis",
+        "kind": 2,
+        "importPath": "error_analyzer",
+        "description": "error_analyzer",
+        "peekOfCode": "def run_error_analysis(filepath):\n    report_lines = [f\"--- ML Analysis Report for {filepath} ---\"]\n    suggestions = analyze_log_with_ml(filepath)\n    report_lines.extend(suggestions)\n    return \"\\n\".join(report_lines)\nif __name__ == \"__main__\":\n    report = run_error_analysis('test_error.log')\n    print(report)",
+        "detail": "error_analyzer",
+        "documentation": {}
+    },
+    {
+        "label": "suggestion_map",
+        "kind": 5,
+        "importPath": "error_analyzer",
+        "description": "error_analyzer",
+        "peekOfCode": "suggestion_map = {\n    'CONVERGENCE_ERROR': \"Suggestion: The simulation failed to converge. This can be caused by an unstable circuit or incorrect simulation parameters.\",\n    'UNKNOWN_PARAMETER': \"Suggestion: An 'unknown parameter' error means a component has a property the simulator doesn't recognize. Check for typos.\",\n    'MISSING_NODE_ERROR': \"Suggestion: A 'missing node' error means a component is referring to a connection point that doesn't exist. Check your netlist for typos.\"\n}\ndef analyze_log_with_ml(filepath):\n    if model is None:\n        return [\"Error: Model file 'error_classifier.joblib' not found. Please run ml_trainer.py to create it.\"]\n    with open(filepath, 'r') as file:\n        log_content = file.read()",
+        "detail": "error_analyzer",
+        "documentation": {}
+    },
+    {
+        "label": "DebuggerApp",
+        "kind": 6,
+        "importPath": "gui",
+        "description": "gui",
+        "peekOfCode": "class DebuggerApp(tk.Tk):\n    def __init__(self):\n        super().__init__()\n        self.title(\"eSim AI Debugging Tool\")\n        self.geometry(\"900x700\")\n        self._setup_styles()\n        sidebar_frame = ttk.Frame(self, width=220, style=\"Sidebar.TFrame\")\n        sidebar_frame.pack(side=\"left\", fill=\"y\", padx=(10, 0), pady=10)\n        sidebar_frame.pack_propagate(False)\n        ttk.Label(sidebar_frame, text=\"Analysis Tools\", font=(\"Segoe UI\", 14, \"bold\"), style=\"Sidebar.TLabel\").pack(pady=(10, 15), padx=15, anchor=\"w\")",
+        "detail": "gui",
+        "documentation": {}
+    },
+    {
+        "label": "load_svg_icon",
+        "kind": 2,
+        "importPath": "gui",
+        "description": "gui",
+        "peekOfCode": "def load_svg_icon(path, size=(20, 20)):\n    if not SVG_SUPPORT:\n        return None\n    try:\n        png_data = cairosvg.svg2png(url=path, output_width=size[0], output_height=size[1])\n        image = Image.open(io.BytesIO(png_data))\n        return ImageTk.PhotoImage(image)\n    except (FileNotFoundError, Exception) as e:\n        print(f\"Warning: Could not load icon at {path}. Error: {e}\")\n        return None",
+        "detail": "gui",
+        "documentation": {}
+    },
+    {
+        "label": "train_model",
+        "kind": 2,
+        "importPath": "ml_trainer",
+        "description": "ml_trainer",
+        "peekOfCode": "def train_model():\n    df = pd.read_csv('error_data.csv')\n    X = df['error_text']\n    y = df['error_type']\n    model = make_pipeline(TfidfVectorizer(), MultinomialNB())\n    model.fit(X, y)\n    joblib.dump(model, 'error_classifier.joblib')\nif  __name__ == \"__main__\":\n    train_model()",
+        "detail": "ml_trainer",
+        "documentation": {}
+    }
+]

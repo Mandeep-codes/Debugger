@@ -1,0 +1,7 @@
+error_text,error_type
+"Timestep too small; convergence failed",CONVERGENCE_ERROR
+"gmin step failed",CONVERGENCE_ERROR
+"Fatal error: Error: unknown parameter [vgs]",UNKNOWN_PARAMETER
+"doAnalyses: Mismatch between circuit and model line",UNKNOWN_PARAMETER
+"Node 5 is not defined in the circuit",MISSING_NODE_ERROR
+"unknown node [5]",MISSING_NODE_ERROR
