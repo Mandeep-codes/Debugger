@@ -2,7 +2,6 @@ eSim AI Debugging Tool
 
 This project is a standalone GUI application built in Python to assist eSim users in debugging electronic circuits. It combines a proactive netlist analyzer, a machine learning-powered error log classifier, and an interactive AI chatbot into a single, user-friendly tool with a modern dark theme.
 
-This tool was created as a submission for the eSim Semester Long Internship Autumn 2025.
 
 Features Implemented
 This application successfully implements all the features outlined in the task requirements, including the optional advanced feature.
