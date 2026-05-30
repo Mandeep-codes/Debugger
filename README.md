@@ -84,3 +84,5 @@ Solution: The application expects an icons folder in the main directory containi
 Error: FileNotFoundError: [Errno 2] No such file or directory: 'error_classifier.joblib'
 
 Solution: The pre-trained model is missing. Run python3 ml_trainer.py to create it.
+
+thanks
